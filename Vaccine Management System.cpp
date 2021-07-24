@@ -8,9 +8,9 @@
 #include<time.h>//manipulte date and time info
 #define num_of_vaccine 200
 using namespace std;
-int password();//b
-void menu();//c
-void show();//a
+int password();//b -->Prototype to use it even if it was written after function which calls this
+void menu();//c  -->Prototype
+void show();//a  -->Prototype
 class Vaccine
 {
 	int age;
@@ -120,7 +120,7 @@ void Vaccine ::viewVaccine()//5
         i++;
     }
     ind.close();
-    int ch;
+    int ch;//choice
     int s=num_of_vaccine-i;
        cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
     cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
@@ -128,24 +128,31 @@ void Vaccine ::viewVaccine()//5
     cout<<"\t\t\t\tVACCINE STATISTICS";
     cout<<"\n\t\t\t*****************************************\n\n";
     cout<<"\t\t 1. Add more        \t\t\t2.View available \n\t\t\t\t\t 3. Back"<<endl;
-    cin>>ch;
-    int f_var=0;
-    fstream file("count.txt");
-    file>>f_var;
+    cin>>ch;//choice magya
+    int f_var=0;//constraint
+     fstream count;
+   count.open("count.txt",ios::in);
+    count>>f_var;
+    count.close();
     switch(ch)
     {
     case 1:
         int m;
         cout<<"\t Enter number of vaccines you want to add "<<endl;
         cin>>m;
-        f_var=f_var+m;
-        file.seekg(0);
-        file<<f_var;
-        cout<<"\t\t Now total number of vaccines are : "<<f_var+s;
-        break;
+        f_var+=m;
+         count.open("count.txt",ios::out);
+        count.seekg(0,ios::beg);
+		count<<f_var;
+		cout<<"\t\t Now total number of vaccines are : "<<f_var+s;
+        count.close();
+		break;
     case 2:
-        cout<<"\n\nAvailable number of vaccines are "<<s+f_var;
-        break;
+    	count.open("count.txt",ios::in);
+    	count>>f_var;
+    	cout<<"\n\nAvailable number of vaccines are "<<f_var+s;
+        count.close();
+		break;
     case 3:
         system("cls");
         menu();
@@ -154,7 +161,7 @@ void Vaccine ::viewVaccine()//5
         cout<<"\nEnter valid option "<<endl;
         menu();
     }
-    file.close();
+    count.close();
     getch();
 }
 //-----------------------------------------
@@ -189,7 +196,8 @@ void Vaccine::searchData()//6
         search_by_profession();
         getch();
         break;
-    case 4:
+  
+	case 4:
         system("cls");
         search_by_gender();
         getch();
@@ -255,7 +263,7 @@ void Vaccine::search_by_age()//6.2
     show();
    while(!in.eof())
 	{
-	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))){
+	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))>0){
 
         if(a==this->age)
         {
@@ -291,18 +299,19 @@ void Vaccine::search_by_profession()//6.3
     cout<<"enter Profession by which you want to search "<<endl;
     fflush(stdin);
     gets(pf);
-    show();
+    
     in.read((char*)this,sizeof(Vaccine));
    while(!in.eof())
 	{
-	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))){
+	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))>0){
 
         if(strcmp(pf,profession)==0)
         {
+        	show();
             showList();
             flag=1;
             p++;
-			
+			return;
             
         }
 		}
