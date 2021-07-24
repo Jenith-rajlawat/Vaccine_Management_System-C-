@@ -3,7 +3,7 @@
 #include<fstream>
 #include<conio.h>//console input output
 #include<string.h>
-#include<windows.h>
+#include<windows.h> //for sleep
 #include<iomanip>//manipulate the output of C++
 #include<time.h>//manipulte date and time info
 #define num_of_vaccine 200
@@ -35,18 +35,18 @@ class Vaccine
     	void search_by_profession();//6.3
     	void search_by_gender();//6.4
 };
-//-----------------------------------------
+//----------------------------------------
 void Vaccine::setData()//1
 {
     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
     cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
     cout<<"\n\t\t\t*****************************************\n";
-    cout<<"\t\t\t\t ADHAR SEARCHING ";
+    cout<<"\t\t\t\t ENTER THE DETAILS ";
     cout<<"\n\t\t\t*****************************************\n\n";
     fflush(stdin);
         cout<<"\n\t\t Enter your name :-  ";
         gets(name);
-        cout<<"\n\t\t Enter your citizenship :-  ";
+        cout<<"\n\t\t Enter your citizenship no :-  ";
         gets(citizenship);
         cout<<"\n\t\t Enter your gender (M|F) :-  ";
         cin>>gender;
@@ -80,7 +80,7 @@ void Vaccine::addNew()//2
 void Vaccine::showData()//3
 {
      cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
-    cout<<"\t\t\t\t\t\t Powered By:- Coding Halt "<<endl<<endl;
+    cout<<"\t\t\t\t\t\t Powered By:- AC/DC "<<endl<<endl;
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\t\t\t\t DETAILS  ";
     cout<<"\n\t\t\t*****************************************\n\n";
@@ -144,7 +144,7 @@ void Vaccine ::viewVaccine()//5
         cout<<"\t\t Now total number of vaccines are : "<<f_var+s;
         break;
     case 2:
-        cout<<"\n\nAvailable number of vaccines are "<<s+f_var;
+        cout<<"\n\nAvailable number of vaccines are : "<<s+f_var;
         break;
     case 3:
         system("cls");
@@ -161,15 +161,16 @@ void Vaccine ::viewVaccine()//5
 void Vaccine::searchData()//6
 {
     Vaccine item;
-      cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
-    cout<<"\t\t\t\t\t\t Powered By:- TEAM ACDC"<<endl<<endl;
+    cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
+	cout<<"\t\t\t\t\t\t Powered By:- TEAM ACDC"<<endl<<endl;
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\t\t\t\tSEARCHING STATISTICS";
     cout<<"\n\t\t\t*****************************************\n\n";
     cout<<"From which option you want to perform searching "<<endl;
-    cout<<"\n\t\t 1. By citizenship \t\t\t 2. By Age "<<endl;
-    cout<<"\n\t\t 3. By profession \t\t 4. By gender "<<endl;
-    cout<<"\n\n\t\tEnter your choice ...............";
+    cout<<"\n\t\t 1. By Citizenship No. \t\t\t 2. By Age "<<endl;
+    cout<<"\n\t\t 3. By profession \t\t\t 4. By gender "<<endl;
+    cout<<"\n\t\t 5. Back to Main Menu"<<endl;
+    cout<<"\n\n\t\tEnter your choice : ";
     int ch;
     cin>>ch;
     switch(ch)
@@ -194,6 +195,10 @@ void Vaccine::searchData()//6
         search_by_gender();
         getch();
         break;
+    case 5:
+    	system("cls");
+        menu();
+        break;
     default:
         system("cls");
         cout<<"ENTER VALID OPTION"<<endl;
@@ -205,7 +210,6 @@ void Vaccine::search_by_citizenship()//6.1
 {
     ifstream in;
 	in.open("vaccinetrial.txt");
-    
 	int flag,p =0;
     char cs[100];
      cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
@@ -214,7 +218,7 @@ void Vaccine::search_by_citizenship()//6.1
     cout<<"\t\t\t\t Citizenship SEARCHING ";
     cout<<"\n\t\t\t*****************************************\n\n";
     cout<<"Enter your Citizenship number "<<endl;
-  fflush(stdin);
+  	fflush(stdin);
     gets(cs);
     show();
     while(!in.eof())
@@ -235,7 +239,7 @@ void Vaccine::search_by_citizenship()//6.1
     	    cout<<"Citizenship you entered doesnot exist";
 	}
 	cout<<"\n\n\n\nNO of people vaccinated  by this age"<<p;
-        in.close();
+    in.close();
 
 }
 //---------------------------------------------------
@@ -250,7 +254,7 @@ void Vaccine::search_by_age()//6.2
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\t\t\t\t AGE SEARCHING ";
     cout<<"\n\t\t\t*****************************************\n\n";
-    cout<<"enter Age by which you want to search "<<endl;
+    cout<<"Enter Age by which you want to search "<<endl;
     cin>>a;
     show();
    while(!in.eof())
@@ -288,20 +292,20 @@ void Vaccine::search_by_profession()//6.3
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\t\t\t\t PROFESSION SEARCHING ";
     cout<<"\n\t\t\t*****************************************\n\n";
-    cout<<"enter Profession by which you want to search "<<endl;
+    cout<<"Enter Profession by which you want to search:"<<endl;
     fflush(stdin);
     gets(pf);
     show();
-    in.read((char*)this,sizeof(Vaccine));
    while(!in.eof())
 	{
-	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))){
+	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))>0){
 
         if(strcmp(pf,profession)==0)
         {
             showList();
             flag=1;
             p++;
+            return;
 			
             
         }
@@ -309,9 +313,9 @@ void Vaccine::search_by_profession()//6.3
     }
     if(flag==0)
     {
-    cout<<"The profession you have Enter does not exist"<<endl;
+    cout<<"SORRY!! No people by this Profession is vaccinated."<<endl;
     }
-    cout<<"\n\n\n NO of people vaccinated by this profession "<<p<<endl;
+    cout<<"\n\n\n No of people vaccinated by this profession: "<<p<<endl;
     in.close();
 }
 //-------------------------------------------------------------------
@@ -344,9 +348,9 @@ void Vaccine::search_by_gender()//6.4
     }
     if(flag==0)
     {
-    cout<<"The gender you entered does not exist "<<endl;
+    cout<<"SORRY!! No people by this Gender is vaccinated."<<endl;
     }
-    cout<<"\n\n\n NO. of people vaccinated by this gender "<<p<<endl;
+    cout<<"\n\n\n NO. of people vaccinated by this gender: "<<p<<endl;
     in.close();
 }
 //-------------------------------------------------------------------------
@@ -366,7 +370,7 @@ int password()//b
 {
     char cname[30],pass[20];
     int ch, i=0,cap=0,capt=0;
-    cout<<"\n\n\n\n\n\t\t\t\t\tUSER NAME:  ";
+    cout<<"\n\n\n\n\t\t\t\t\tUSER NAME:  ";
     fflush(stdin);
     gets(cname);
     cout<<"\n\t\t\t\t\tPASSWORD:    ";
@@ -379,7 +383,7 @@ int password()//b
     pass[i] = '\0';
     srand(time(0));
     cap=rand();
-    cout<<"\n\t\t\t\t\t CAPTURE:->  "<<cap<<endl;
+    cout<<"\n\n\t\t\t\t\tCAPTURE:-> "<<cap<<endl;
     cout<<" Please enter the valid capture :-   ";
     cin>>capt;
     if( (strcmp(cname,"a")==0) && (strcmp(pass,"b")==0) && cap==capt)
@@ -391,10 +395,10 @@ int password()//b
 void menu()//c
 {
     system("cls");
-     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
-    cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
+    cout<<"\n\n\t\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
+	cout<<"\t\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
     cout<<"\n\t\t\t*****************************************\n";
-    cout<<"\t\t\t\t\tMENU";
+    cout<<"\t\t\t\t WELCOME TO THE MAIN MENU";
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\n\t\t1: Add NEW Record\t\t\t 2: View VACCINE DATA"<<endl;
     cout<<"\n\t\t3: search   \t\t\t\t 4: exit"<<endl;
@@ -406,11 +410,12 @@ int main()//MAINFUNCTION--------------------------------------------------------
      int k=3;
      int num_vac;
     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
-    cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl;
-     cout<<"\t\n\n Press any key to continue.............  "<<endl;
+	cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl;
+    cout<<"\t\n\n Press any key to continue.............  "<<endl;
     getch();
     B:
     system("cls");
+    cout<<"  \n\n\t\t\t\t\xB2\xB2\xB2\xB2\xB2\xB2\xB2   WELCOME TO LOGIN PAGE   \xB2\xB2\xB2\xB2\xB2\xB2\xB2"<<endl;
     cout<<"\n\n\t\t\t\t*********************************************";
     cout<<"\n\t\t\t\t\tEnter User name and Password\n";
     cout<<"\t\t\t\t*********************************************\n";
@@ -466,4 +471,3 @@ int main()//MAINFUNCTION--------------------------------------------------------
 
       return 0;
 }//----------------------------------------------------------------------------------------------------------------------
-
