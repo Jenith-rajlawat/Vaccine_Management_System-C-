@@ -35,7 +35,7 @@ class Vaccine
     	void search_by_profession();//6.3
     	void search_by_gender();//6.4
 };
-//----------------------------------------
+//-----------------------------------------
 void Vaccine::setData()//1
 {
     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
