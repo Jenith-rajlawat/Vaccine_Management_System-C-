@@ -299,19 +299,18 @@ void Vaccine::search_by_profession()//6.3
     cout<<"enter Profession by which you want to search "<<endl;
     fflush(stdin);
     gets(pf);
-    
+    show();
     in.read((char*)this,sizeof(Vaccine));
    while(!in.eof())
 	{
-	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))>0){
+	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))){
 
         if(strcmp(pf,profession)==0)
         {
-        	show();
             showList();
             flag=1;
             p++;
-			return;
+			
             
         }
 		}
