@@ -3,14 +3,14 @@
 #include<fstream>
 #include<conio.h>//console input output
 #include<string.h>
-#include<windows.h>
+#include<windows.h> //for sleep
 #include<iomanip>//manipulate the output of C++
 #include<time.h>//manipulte date and time info
 #define num_of_vaccine 200
 using namespace std;
-int password();//b -->Prototype to use it even if it was written after function which calls this
-void menu();//c  -->Prototype
-void show();//a  -->Prototype
+int password();//b
+void menu();//c
+void show();//a
 class Vaccine
 {
 	int age;
@@ -22,31 +22,33 @@ class Vaccine
 	char profession[100];
 	char address[100];
 	char mobileNumber[100];
+	char vaccine[100];
 	public:
 		void setData();//1
 		void addNew();//2
 		void showData();//3
 		void showList();//4
 		void searchData();//6
-		
 		void viewVaccine();//5
 		void search_by_citizenship();//6.1
     	void search_by_age();//6.2
     	void search_by_profession();//6.3
     	void search_by_gender();//6.4
+    	void search_by_vaccine();//6.5
+    	void view_all();//6.6
 };
-//-----------------------------------------
+//----------------------------------------
 void Vaccine::setData()//1
 {
     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
     cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
     cout<<"\n\t\t\t*****************************************\n";
-    cout<<"\t\t\t\t ADHAR SEARCHING ";
+    cout<<"\t\t\t\t ENTER THE DETAILS ";
     cout<<"\n\t\t\t*****************************************\n\n";
     fflush(stdin);
         cout<<"\n\t\t Enter your name :-  ";
         gets(name);
-        cout<<"\n\t\t Enter your citizenship :-  ";
+        cout<<"\n\t\t Enter your citizenship no :-  ";
         gets(citizenship);
         cout<<"\n\t\t Enter your gender (M|F) :-  ";
         cin>>gender;
@@ -64,6 +66,8 @@ void Vaccine::setData()//1
         gets(address);
         cout<<"\n\t\t Enter your Mobile number :- ";
         gets(mobileNumber);
+        cout<<"\n\t\t Enter the vaccine injected :- ";
+        gets(vaccine);
 }
 //------------------------------------------------------
 void Vaccine::addNew()//2
@@ -79,13 +83,13 @@ void Vaccine::addNew()//2
 //---------------------------------------------
 void Vaccine::showData()//3
 {
-     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
-    cout<<"\t\t\t\t\t\t Powered By:- Coding Halt "<<endl<<endl;
+    cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
+    cout<<"\t\t\t\t\t\t Powered By:- AC/DC "<<endl<<endl;
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\t\t\t\t DETAILS  ";
     cout<<"\n\t\t\t*****************************************\n\n";
-   cout<<"\t\t Name is: "<<name<<endl;
-   cout<<"\t\t Citizenship number is: "<<citizenship<<endl;
+  	cout<<"\t\t Name is: "<<name<<endl;
+   	cout<<"\t\t Citizenship number is: "<<citizenship<<endl;
     cout<<"\t\t Your age is "<<age<<endl;
     cout<<"\t\t Profession is : "<<profession<<endl;
     cout<<"\t\t Gender is : "<<gender<<endl;
@@ -93,20 +97,25 @@ void Vaccine::showData()//3
     cout<<"\t\t Body temperature is : "<<temperature<<endl;
     cout<<"\t\t Address is "<<address<<endl;
     cout<<"\t\t Mobile number is: "<<mobileNumber<<endl;
+    cout<<"\n\t\t vaccine injected : "<<vaccine<<endl;
+    
 }
 //------------------------------------------
 void Vaccine::showList()//4
 {
     cout<<"\n";
-    cout<<setw(20)<<setiosflags(ios::left)<<name;
-    cout<<setw(20)<<citizenship;
-    cout<<setw(10)<<age;
-    cout<<setw(18)<<profession;
-    cout<<setw(8)<<bloodPressure;
+    cout<<setw(15)<<setiosflags(ios::left)<<name;
+    cout<<setw(15)<<citizenship;
+    cout<<setw(15)<<age;
+    cout<<setw(15)<<profession;
+    cout<<setw(15)<<bloodPressure;
     cout<<setw(15)<<temperature;
-    cout<<setw(7)<<gender;
+    cout<<setw(15)<<gender;
     cout<<setw(15)<<mobileNumber;
-    cout<<address<<endl;
+    cout<<setw(15)<<address;
+    cout<<setw(15)<<vaccine<<endl;
+    
+    
 }
 //-----------------------------------------
 void Vaccine ::viewVaccine()//5
@@ -120,7 +129,7 @@ void Vaccine ::viewVaccine()//5
         i++;
     }
     ind.close();
-    int ch;//choice
+    int ch;
     int s=num_of_vaccine-i;
        cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
     cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
@@ -128,31 +137,29 @@ void Vaccine ::viewVaccine()//5
     cout<<"\t\t\t\tVACCINE STATISTICS";
     cout<<"\n\t\t\t*****************************************\n\n";
     cout<<"\t\t 1. Add more        \t\t\t2.View available \n\t\t\t\t\t 3. Back"<<endl;
-    cin>>ch;//choice magya
-    int f_var=0;//constraint
-     fstream count;
-   count.open("count.txt",ios::in);
-    count>>f_var;
-    count.close();
+    cin>>ch;
+    int f_var=0;
+    fstream file("count.txt",ios::in);
+    file>>f_var;
+    file.close();
     switch(ch)
     {
     case 1:
         int m;
-        cout<<"\t Enter number of vaccines you want to add "<<endl;
+        cout<<"\t Enter number of vaccines you want to add :"<<endl;
         cin>>m;
-        f_var+=m;
-         count.open("count.txt",ios::out);
-        count.seekg(0,ios::beg);
-		count<<f_var;
-		cout<<"\t\t Now total number of vaccines are : "<<f_var+s;
-        count.close();
-		break;
+        f_var=f_var+m;
+        file.open("count.txt",ios::out);
+        file.seekg(0);
+        file<<f_var;
+        cout<<"\t\t Now total number of vaccines are : "<<f_var+s;
+        file.close();
+        break;
     case 2:
-    	count.open("count.txt",ios::in);
-    	count>>f_var;
-    	cout<<"\n\nAvailable number of vaccines are "<<f_var+s;
-        count.close();
-		break;
+    	file.open("count.txt",ios::in);
+        cout<<"\n\nAvailable number of vaccines are : "<<s+f_var;
+        file.close();
+        break;
     case 3:
         system("cls");
         menu();
@@ -161,22 +168,23 @@ void Vaccine ::viewVaccine()//5
         cout<<"\nEnter valid option "<<endl;
         menu();
     }
-    count.close();
+    file.close();
     getch();
 }
 //-----------------------------------------
 void Vaccine::searchData()//6
 {
     Vaccine item;
-      cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
-    cout<<"\t\t\t\t\t\t Powered By:- TEAM ACDC"<<endl<<endl;
+    cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
+	cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC"<<endl<<endl;
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\t\t\t\tSEARCHING STATISTICS";
     cout<<"\n\t\t\t*****************************************\n\n";
     cout<<"From which option you want to perform searching "<<endl;
-    cout<<"\n\t\t 1. By citizenship \t\t\t 2. By Age "<<endl;
-    cout<<"\n\t\t 3. By profession \t\t 4. By gender "<<endl;
-    cout<<"\n\n\t\tEnter your choice ...............";
+    cout<<"\n\t\t 1. By Citizenship No. \t\t\t 2. By Age "<<endl;
+    cout<<"\n\t\t 3. By Profession \t\t\t 4. By Gender "<<endl;
+    cout<<"\n\t\t 5. By Vaccine \t\t\t\t 6. Back to Main Menu "<<endl;
+    cout<<"\n\n\t\tEnter your choice : ";
     int ch;
     cin>>ch;
     switch(ch)
@@ -196,11 +204,19 @@ void Vaccine::searchData()//6
         search_by_profession();
         getch();
         break;
-  
-	case 4:
+    case 4:
         system("cls");
         search_by_gender();
         getch();
+        break;
+    case 5:
+        system("cls");
+        search_by_vaccine();
+        getch();
+        break;
+    case 6:
+    	system("cls");
+        menu();
         break;
     default:
         system("cls");
@@ -213,7 +229,6 @@ void Vaccine::search_by_citizenship()//6.1
 {
     ifstream in;
 	in.open("vaccinetrial.txt");
-    
 	int flag,p =0;
     char cs[100];
      cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
@@ -222,7 +237,7 @@ void Vaccine::search_by_citizenship()//6.1
     cout<<"\t\t\t\t Citizenship SEARCHING ";
     cout<<"\n\t\t\t*****************************************\n\n";
     cout<<"Enter your Citizenship number "<<endl;
-  fflush(stdin);
+  	fflush(stdin);
     gets(cs);
     show();
     while(!in.eof())
@@ -243,7 +258,7 @@ void Vaccine::search_by_citizenship()//6.1
     	    cout<<"Citizenship you entered doesnot exist";
 	}
 	cout<<"\n\n\n\nNO of people vaccinated  by this age"<<p;
-        in.close();
+    in.close();
 
 }
 //---------------------------------------------------
@@ -258,12 +273,12 @@ void Vaccine::search_by_age()//6.2
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\t\t\t\t AGE SEARCHING ";
     cout<<"\n\t\t\t*****************************************\n\n";
-    cout<<"enter Age by which you want to search "<<endl;
+    cout<<"Enter Age by which you want to search "<<endl;
     cin>>a;
     show();
    while(!in.eof())
 	{
-	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))>0){
+	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))){
 
         if(a==this->age)
         {
@@ -296,20 +311,20 @@ void Vaccine::search_by_profession()//6.3
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\t\t\t\t PROFESSION SEARCHING ";
     cout<<"\n\t\t\t*****************************************\n\n";
-    cout<<"enter Profession by which you want to search "<<endl;
+    cout<<"Enter Profession by which you want to search:"<<endl;
     fflush(stdin);
     gets(pf);
     show();
-    in.read((char*)this,sizeof(Vaccine));
    while(!in.eof())
 	{
-	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))){
+	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))>0){
 
         if(strcmp(pf,profession)==0)
         {
             showList();
             flag=1;
             p++;
+            return;
 			
             
         }
@@ -317,9 +332,9 @@ void Vaccine::search_by_profession()//6.3
     }
     if(flag==0)
     {
-    cout<<"The profession you have Enter does not exist"<<endl;
+    cout<<"SORRY!! No people by this Profession is vaccinated."<<endl;
     }
-    cout<<"\n\n\n NO of people vaccinated by this profession "<<p<<endl;
+    cout<<"\n\n\n No of people vaccinated by this profession: "<<p<<endl;
     in.close();
 }
 //-------------------------------------------------------------------
@@ -352,29 +367,94 @@ void Vaccine::search_by_gender()//6.4
     }
     if(flag==0)
     {
-    cout<<"The gender you entered does not exist "<<endl;
+    cout<<"SORRY!! No people by this Gender is vaccinated."<<endl;
     }
-    cout<<"\n\n\n NO. of people vaccinated by this gender "<<p<<endl;
+    cout<<"\n\n\n NO. of people vaccinated by this gender: "<<p<<endl;
     in.close();
 }
 //-------------------------------------------------------------------------
+void Vaccine::search_by_vaccine()//6.5
+{
+    ifstream in;
+	in.open("vaccinetrial.txt");
+    int flag =0;
+    int p=0;
+    char pf[100];
+     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
+    cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
+    cout<<"\n\t\t\t*****************************************\n";
+    cout<<"\t\t\t\t PROFESSION SEARCHING ";
+    cout<<"\n\t\t\t*****************************************\n\n";
+    cout<<"Enter Vaccine to search: ";
+    fflush(stdin);
+    gets(pf);
+    show();
+   while(!in.eof())
+	{
+	if(in.read(reinterpret_cast<char*>(this),sizeof(*this))>0){
+
+        if(strcmp(pf,vaccine)==0)
+        {
+            showList();
+            flag=1;
+            p++;
+            return;
+			
+            
+        }
+		}
+    }
+    if(flag==0)
+    {
+    cout<<"SORRY!! No people by this vaccine is vaccinated."<<endl;
+    }
+    cout<<"\n\n\n No of people vaccinated by this vaccine: "<<p<<endl;
+    in.close();
+}
+//---------------------------------------------------------
 void show()//a
 {
-    cout<<setw(20)<<setiosflags(ios::left)<<"Name ";
-    cout<<setw(20)<<"Aadhar No.";
-    cout<<setw(10)<<"Age";
-    cout<<setw(18)<<"Profession";
-    cout<<setw(8)<<"B.P.";
+	cout<<"\n\n\n";
+    cout<<setw(15)<<setiosflags(ios::left)<<"Name ";
+    cout<<setw(15)<<"Aadhar No.";
+    cout<<setw(15)<<"Age";
+    cout<<setw(15)<<"Profession";
+    cout<<setw(15)<<"B.P.";
     cout<<setw(15)<<"Temperature";
-    cout<<setw(7)<<"gender";
+    cout<<setw(15)<<"gender";
     cout<<setw(15)<<"Mobile No.";
-    cout<<"Address"<<endl;
+    cout<<setw(15)<<"Address";
+    cout<<setw(15)<<"Vaccine"<<endl;
 }
+//-------------------------------------------------
+void Vaccine::view_all()//6.7
+{
+			fstream outfile;
+			outfile.open("vaccinetrial.txt",ios::binary|ios::in);
+			if(!outfile){
+				cout<<"File doesnot exist";
+			}
+			cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
+    		cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
+    		cout<<"\n\t\t\t*****************************************\n";
+    		cout<<"\t\t\t\t\tALL DATA ";
+    		cout<<"\n\t\t\t*****************************************\n\n";
+			show();
+			while(!outfile.eof()){
+				if(outfile.read(reinterpret_cast<char*>(this),sizeof(*this))>0){
+					showList();
+				}
+				
+			}
+			getch();
+			outfile.close();
+}
+//--------------------------------------------------------------------
 int password()//b
 {
     char cname[30],pass[20];
     int ch, i=0,cap=0,capt=0;
-    cout<<"\n\n\n\n\n\t\t\t\t\tUSER NAME:  ";
+    cout<<"\n\n\n\n\t\t\t\t\tUSER NAME:  ";
     fflush(stdin);
     gets(cname);
     cout<<"\n\t\t\t\t\tPASSWORD:    ";
@@ -387,7 +467,7 @@ int password()//b
     pass[i] = '\0';
     srand(time(0));
     cap=rand();
-    cout<<"\n\t\t\t\t\t CAPTURE:->  "<<cap<<endl;
+    cout<<"\n\n\t\t\t\t\tCAPTURE:-> "<<cap<<endl;
     cout<<" Please enter the valid capture :-   ";
     cin>>capt;
     if( (strcmp(cname,"a")==0) && (strcmp(pass,"b")==0) && cap==capt)
@@ -399,13 +479,14 @@ int password()//b
 void menu()//c
 {
     system("cls");
-     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
-    cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
+    cout<<"\n\n\t\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
+	cout<<"\t\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl<<endl;
     cout<<"\n\t\t\t*****************************************\n";
-    cout<<"\t\t\t\t\tMENU";
+    cout<<"\t\t\t\t WELCOME TO THE MAIN MENU";
     cout<<"\n\t\t\t*****************************************\n";
     cout<<"\n\t\t1: Add NEW Record\t\t\t 2: View VACCINE DATA"<<endl;
-    cout<<"\n\t\t3: search   \t\t\t\t 4: exit"<<endl;
+    cout<<"\n\t\t3: search   \t\t\t\t 4: View All Data"<<endl;
+    cout<<"\n\t\t5: exit"<<endl;
 }
 //----------------------------------------
 int main()//MAINFUNCTION---------------------------------------------------------------------------------------------
@@ -414,11 +495,12 @@ int main()//MAINFUNCTION--------------------------------------------------------
      int k=3;
      int num_vac;
     cout<<"\n\n\t\t\xB3\xB2=\xB2=\xB2-\xB3 VACCINE MANAGEMENT SYSTEM  \xB3\xB2=\xB2=\xB2-\xB3\n\n"<<endl;
-    cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl;
-     cout<<"\t\n\n Press any key to continue.............  "<<endl;
+	cout<<"\t\t\t\t\t\t Powered By:- TEAM AC/DC "<<endl;
+    cout<<"\t\n\n Press any key to continue.............  "<<endl;
     getch();
     B:
     system("cls");
+    cout<<"  \n\n\t\t\t\t\xB2\xB2\xB2\xB2\xB2\xB2\xB2   WELCOME TO LOGIN PAGE   \xB2\xB2\xB2\xB2\xB2\xB2\xB2"<<endl;
     cout<<"\n\n\t\t\t\t*********************************************";
     cout<<"\n\t\t\t\t\tEnter User name and Password\n";
     cout<<"\t\t\t\t*********************************************\n";
@@ -460,9 +542,13 @@ int main()//MAINFUNCTION--------------------------------------------------------
        	   	  	obj.viewVaccine();
                  break;
          case 3:system("cls");
-            obj.searchData();
-                 break;
-         case 4:  system("cls");
+            	obj.searchData();
+                break;
+          case 4:system("cls");
+            	obj.view_all();
+                break;
+        
+         case 5:  system("cls");
                     exit(0);
          default: system("cls");
                   cout<<"\n\n\n\n\n\n\n\n\t\t\t\t\t\tTHANK YOU!!";
